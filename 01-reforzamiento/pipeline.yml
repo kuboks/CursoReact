@@ -1,0 +1,64 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# Create: 09-01-2026 dd-mm-yyyy
+# Last modified: 09-01-2026 dd-mm-yyyy
+
+trigger: none
+
+parameters:
+  - name: target_environment
+    displayName: "Ambiente destino"
+    type: string
+    default: "DEV"
+    values:
+      - DEV
+      - UAT
+      - PRO
+
+pool:
+  name: $(POOL.AGENTE)
+
+variables:
+# Variables de control desde Azure DevOps (configurar por ambiente)
+  testejecutar: "$(Test_ejecutar)"
+  precargatest: "$(Precarga_test)"
+  scriptsilver: "$(Script_silver)"
+  archivo_Consultas: "$(Nombre_Consulta)"
+  archivo_llenado_oro: "$(Nombre_Scripts_Llenado)"
+
+  # Rutas locales del proyecto
+  ruta_local: "$(Ruta_Local_Solucion)"
+
+  # Flags de control
+  ci_tests_enable_coverage_only_reports: "$(Ejecutar_test)"
+  ejecutarscriptcodeconfing: "$(SubirArchivoconfig)"
+  cargarnotebooks: "$(Subir_Notebooks)"
+  jar: "$(Subir_jar)"
+
+  # Configuración técnica
+  DATABRICKS_CLI_VERSION: "0.241.2"
+  SBT_OPTS: "-Xmx4g -Xms4g -XX:+UseG1GC"
+
+stages:
+  - stage: test
+    displayName: "Pruebas"
+    dependsOn: build
+    jobs:
+      - job: TestJob
+        displayName: "Ejecutar Pruebas"
+        steps:
+          # Ejecutar pruebas con cobertura
+          - template: templates/test/tests.yml
+            parameters:
+              projectPath: $(ruta_local)
+              testToExecute: $(testejecutar)
+              precargaTest: $(precargatest)
+
+          # Publicar resultados
+          - template: templates/test/publish-results.yml
+            parameters:
+              projectPath: $(ruta_local)
+              environment: ${{ parameters.target_environment }}
