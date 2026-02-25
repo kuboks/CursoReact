@@ -41,5 +41,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./01-reforzamiento/dist   # carpeta de salida del build
           publish_branch: gh-pages    # rama de despliegue
-          destination_dir: /docs/reforzamiento
+          destination_dir: docs/reforzamiento
       
