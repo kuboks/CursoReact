@@ -39,7 +39,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "${{ github.workspace }}/01-reforzamiento/dist"   # carpeta de salida del build
+          publish_dir: ./01-reforzamiento/dist   # carpeta de salida del build
           publish_branch: gh-pages    # rama de despliegue
           destination_dir: /docs/reforzamiento
       
