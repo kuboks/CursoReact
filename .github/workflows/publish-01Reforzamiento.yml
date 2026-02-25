@@ -6,6 +6,8 @@ name: Node.js Package
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - '01-reforzamiento/**'
 
 jobs:
   build:
@@ -20,17 +22,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      
+
+      - name: Ubicacion
+        run: ls ${{ github.workspace }}
       # Instalar dependencias
       - name: Instalando dependencias
+        working-directory: ${{ github.workspace }}/01-reforzamiento
         run: npm install
       # Compilar proyecto
       - name: Compilar proyecto
-        working-directory: ./01-reforzamiento
+        working-directory: ${{ github.workspace }}/01-reforzamiento
         run: npm run build
       # Copiar el build
       - name: Copy build
         run: |
+          if [ ! -d "${{ github.workspace }}/docs/reforzamiento" ]; then
+            echo "Carpeta proyecto1 no existe, creando..."
+            mkdir -p $${{ github.workspace }}/docs/reforzamiento
+          else
+            echo "Carpeta proyecto1 ya existe, no se crea."
+          fi
           mkdir -p docs/reforzamiento
-          cp -r 01-reforzamiento/build/* docs/reforzamiento
+          cp -r 01-reforzamiento/build/* docs/reforzamiento/
       
