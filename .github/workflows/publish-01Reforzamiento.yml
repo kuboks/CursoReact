@@ -25,21 +25,21 @@ jobs:
           node-version: 20
 
       - name: Ubicacion
-        run: ls ${{ github.workspace }}
+        run: ls "${{ github.workspace }}"
       # Instalar dependencias
       - name: Instalando dependencias
-        working-directory: ${{ github.workspace }}/01-reforzamiento
+        working-directory: "${{ github.workspace }}/01-reforzamiento"
         run: npm install
       # Compilar proyecto
       - name: Compilar proyecto
-        working-directory: ${{ github.workspace }}/01-reforzamiento
+        working-directory: "${{ github.workspace }}/01-reforzamiento"
         run: npm run build
       # Copiar el build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/01-reforzamiento/dist   # carpeta de salida del build
+          publish_dir: "${{ github.workspace }}/01-reforzamiento/dist"   # carpeta de salida del build
           publish_branch: gh-pages    # rama de despliegue
-          destination_dir: ${{ github.workspace }}/docs/refozamiento 
+          destination_dir: "/docs/refozamiento"
       
