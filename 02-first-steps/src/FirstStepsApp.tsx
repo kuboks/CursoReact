@@ -1,12 +1,12 @@
 import { ItemCounter } from "./shopping-cart/ItemCounter";
-interface ItemInCard {
+export interface ItemInCard {
   name: string;
   quantity: number | undefined;
 }
 
 const items: ItemInCard[] = [
   { name: "Nintendo switch 2", quantity: 1 },
-  { name: "Xbox", quantity: 10 },
+  { name: "Xbox", quantity: 9999 },
   { name: "PSP", quantity: 8 },
 ];
 

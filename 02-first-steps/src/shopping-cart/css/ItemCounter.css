@@ -1,0 +1,19 @@
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item-name {
+  width: 200px;
+}
+
+.item-quantity {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 25px;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
