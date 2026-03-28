@@ -9,5 +9,7 @@ export default defineConfig({
     coverage: {
       provider: "v8", // or 'istanbul'
     },
+    environment: "jsdom",
+    globals: true,
   },
 });
