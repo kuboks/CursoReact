@@ -4,7 +4,7 @@ export interface ItemInCard {
   quantity: number | undefined;
 }
 
-const items: ItemInCard[] = [
+export const items: ItemInCard[] = [
   { name: "Nintendo switch 2", quantity: 1 },
   { name: "Xbox", quantity: 9999 },
   { name: "PSP", quantity: 8 },
@@ -12,7 +12,7 @@ const items: ItemInCard[] = [
 
 export function FirstStepsApp() {
   return (
-    <>
+    <div data-testid="div-app">
       <h1>Carrito de compras</h1>
       {/* <ItemCounter name="Nintendo" quantity={10} /> */}
       {items.map((element: ItemInCard) => (
@@ -22,6 +22,6 @@ export function FirstStepsApp() {
           quantity={element.quantity}
         />
       ))}
-    </>
+    </div>
   );
 }

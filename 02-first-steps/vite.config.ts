@@ -8,6 +8,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: "v8", // or 'istanbul'
+      exclude: ["*.css", "*css*.css"],
     },
     environment: "jsdom",
     globals: true,

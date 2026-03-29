@@ -36,11 +36,37 @@ describe("multiply", () => {
   });
 });
 
-// describe("Divide", () => {
-//   test("dividir 2 numeros positivos", () => {
-//     const result = divide(1, 1);
-//     console.log({ result });
+describe("Divide", () => {
+  test("Dividir 2 numeros positivos", () => {
+    // Arrange
+    const [a, b] = [10, 10];
 
-//     expect(result).toBe(0);
-//   });
-// });
+    // Act
+    const result = divide(a, b);
+
+    // Assert
+    expect(result).toBe(a / b);
+  });
+
+  test("Dividir 2 numeros negativos", () => {
+    // Arrange
+    const [a, b] = [-9, -10];
+
+    // Act
+    const result = divide(a, b);
+
+    // Assert
+    expect(result).toBe(a / b);
+  });
+
+  test("Dividir un numero positivo y un numero negativo", () => {
+    // Arrange
+    const [a, b] = [7, -5];
+
+    // Act
+    const result = divide(a, b);
+
+    // Assert
+    expect(result).toBe(a / b);
+  });
+});

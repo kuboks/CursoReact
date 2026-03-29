@@ -5,10 +5,10 @@ import styles from "./css/ItemCounter.module.css";
 
 interface Props {
   name: string;
-  quantity: number | undefined;
+  quantity?: number | undefined;
 }
 
-export const ItemCounter = ({ name, quantity }: Props) => {
+export const ItemCounter = ({ name, quantity = 1 }: Props) => {
   // Hooks siempre van al inicio
   const [itemCounter, setItemCounter] = useState(
     quantity && quantity > 0 ? quantity : 1,
@@ -37,11 +37,19 @@ export const ItemCounter = ({ name, quantity }: Props) => {
     // Cuando se usa css por modulo se debe usar styles['nombre'] si tiene simbolos
     // Si es un solo una palabra seria styles.nombre
     <section className={styles["item-row"]}>
-      <span className={styles["item-name"]}>{name}</span>
+      <span
+        data-testid="spanName"
+        className={styles["item-name"]}
+        style={{ color: itemCounter === 1 ? "red" : "#000000" }}
+      >
+        {name}
+      </span>
       <button onMouseEnter={handlerMouse} onClick={handlerClick}>
         +1
       </button>
-      <span className={styles["item-quantity"]}>{itemCounter}</span>
+      <span data-testid="counter" className={styles["item-quantity"]}>
+        {itemCounter}
+      </span>
       <button onClick={handlerSustract}>-1</button>
     </section>
   );
