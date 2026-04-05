@@ -1,6 +1,7 @@
 import type { GiphyResponse } from "../interfaces/giphy.response";
 import type { Gif } from "../interfaces/gif.interface";
 import { giphyAPI } from "../api/giphy.api";
+import { formatFileSize } from "../../utils/fuctions.utils";
 
 export const getGifsByQuery = async (query: string): Promise<Gif[]> => {
   const response = await giphyAPI.get<GiphyResponse>("/search", {
@@ -18,6 +19,7 @@ export const getGifsByQuery = async (query: string): Promise<Gif[]> => {
     url: gif.images.original.url,
     width: Number(gif.images.original.width),
     height: Number(gif.images.original.height),
+    size: formatFileSize(Number(gif.images.original.size)),
   }));
 
   return result;

@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { Gif } from "../../mock-data/gifs.mock";
+import type { Gif } from "../interfaces/gif.interface";
 
 interface Props {
   gifList: Gif[];
@@ -16,7 +16,7 @@ export const GifList: FC<Props> = ({ gifList }) => {
           <img src={gif.url} alt={gif.title} />
           <h3>{gif.title}</h3>
           <p>
-            {gif.width}x{gif.height} (1.5mb)
+            {gif.width}x{gif.height} size: {gif.size}
           </p>
         </div>
       ))}
