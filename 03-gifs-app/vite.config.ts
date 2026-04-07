@@ -1,11 +1,17 @@
-import { defineConfig } from 'vite'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
+/// <reference types="vitest/config" />
+import { defineConfig } from "vite";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    babel({ presets: [reactCompilerPreset()] })
-  ],
-})
+  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  test: {
+    coverage: {
+      provider: "v8", // or 'istanbul'
+      exclude: ["*.css", "*css*.css"],
+    },
+    environment: "jsdom",
+    globals: true,
+  },
+});
